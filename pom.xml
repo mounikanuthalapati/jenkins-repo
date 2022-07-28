@@ -35,7 +35,7 @@
 						      <muleVersion>4.4.0</muleVersion>
 						      <username>m_n09</username>
 						      <password>Mounika@123</password>
-						      <applicationName>doc-cloud-jenkins-app-babuuuuuuu-papaaaaaaa</applicationName>
+						      <applicationName>doc-cloud-jenkins</applicationName>
 						      <environment>Sandbox</environment>
 						      <region>us-east-1</region>
 						      <workers>1</workers>
