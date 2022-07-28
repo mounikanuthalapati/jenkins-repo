@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="f4ceffe2-b386-4352-90f5-ed43bddd07a1" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="doc-verificationFlow" doc:id="1057d359-13ef-4b30-848a-aa16ac39c613" >
+		<http:listener doc:name="Listener" doc:id="6ffab800-10eb-4a67-9a05-b3799e702093" config-ref="HTTP_Listener_config" path="/doc"/>
+		<logger level="INFO" doc:name="Logger" doc:id="82e00f8b-6be5-47a2-9a83-096cd94f5efd" message='#["doc verification"]'/>
+		<ee:transform doc:name="Transform Message" doc:id="9e38321e-4d4b-4210-a2ee-c012470731fc" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+[
+	{
+		"empid" : 100,
+		"docverification" : "pass"
+	},
+	{
+		"empid" : 101,
+		"docverification" : "fail"
+	},
+	{
+		"empid" : 102,
+		"docverification" : "fail"
+	}
+]]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+</mule>
